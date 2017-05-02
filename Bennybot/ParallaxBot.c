@@ -45,8 +45,8 @@ volatile int motor_flag = 0;
 
 
 
-int defaultStraightSpeed = 80;
-int defaultTurnSpeed = 50;
+int defaultStraightSpeed = 60;
+int defaultTurnSpeed = 30;
 
 int pingDistance;
 
@@ -58,7 +58,7 @@ int main()
 	//access the simpleIDE terminal
 	simpleterm_close();
 	//set full-duplex serialization for the terminal
-	term = fdserial_open(31, 30, 0, 115200);
+	term = fdserial_open(31, 30, 0, 9600);
  
    ticks_per_ms = CLKFREQ / 1000;
    
@@ -73,12 +73,10 @@ int main()
         while(doot<LED_COUNT)
         {
         set_neopixel(doot,0xFFFF00);        
-        pause(100); 
+        pause(10); 
         doot+=1;
         }       
-   
-	cog_run(blink, 128);                  // Run blink in other cog
-	cog_run(motor_controller,128);
+
 	char c;
 
 	//servo_angle(16, gripDegree); //Orient gripper to half open on start
