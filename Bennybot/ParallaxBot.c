@@ -43,6 +43,7 @@ int commandget = 0;
 volatile int current_leftspd = 0;
 volatile int current_rightspd = 0;
 volatile int motor_flag = 0;
+volatile int drive_flag = 0;
 
 
 
@@ -178,12 +179,17 @@ void set_motor_controller(int leftSpeed, int rightSpeed)
 	current_leftspd =leftSpeed;
 	current_rightspd = rightSpeed;
 	motor_flag = 1;
+  if(drive_flag ==0){
+    drive_flag =1;
+    drive_open();
+  }    
 }  
 
 void Stop(void)
 {
 	//drive_feedback(0);
   drive_close();
+  drive_flag =0;
 
 
 }  
